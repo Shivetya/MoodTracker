@@ -5,14 +5,14 @@
     android:layout_height="match_parent"
     android:background="@color/light_sage"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".controller.MainActivity">
 
     <ImageView
         android:id="@+id/activity_main_image_smiley"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:contentDescription="Smiley Happy"
+        android:contentDescription="@string/smiley_happy"
         android:src="@mipmap/smiley_happy" />
 
     <ImageButton
@@ -20,9 +20,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
         android:layout_marginBottom="20dp"
+        android:layout_marginStart="20dp"
         android:background="@color/light_sage"
+        android:contentDescription="@string/note_add_button"
         android:src="@mipmap/ic_note_add_black" />
 
     <ImageButton
@@ -34,6 +35,7 @@
         android:layout_marginBottom="20dp"
         android:layout_marginEnd="20dp"
         android:background="@color/light_sage"
-        android:src="@mipmap/ic_history_black"/>
+        android:contentDescription="@string/history_button"
+        android:src="@mipmap/ic_history_black" />
 
 </RelativeLayout>
