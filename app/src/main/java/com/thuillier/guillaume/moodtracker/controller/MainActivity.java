@@ -9,8 +9,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import com.thuillier.guillaume.moodtracker.R;
-import com.thuillier.guillaume.moodtracker.model.Mood;
-import com.thuillier.guillaume.moodtracker.model.MySimpleGestureListener;
+import com.thuillier.guillaume.moodtracker.model.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void swipeUp(){
 
-        if (mLocationInt < MAX_MOOD - 1) {
+        if (mLocationInt + 1 < MAX_MOOD) {
             mLocationInt++;
             changeMoodVisual();
         }
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void swipeDown(){
 
-        if(mLocationInt >= 1) {
+        if(mLocationInt - 1  >= 0) {
             mLocationInt--;
             changeMoodVisual();
         }
@@ -79,40 +78,60 @@ public class MainActivity extends AppCompatActivity {
         switch (mActualMood){
 
             case VERY_SAD:
-                mSmileyImage.setImageResource(R.mipmap.smiley_sad);
-                mMainBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.faded_red));
-                mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, R.color.faded_red));
-                mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, R.color.faded_red));
+                verySad();
                 break;
 
             case SAD:
-                mSmileyImage.setImageResource(R.mipmap.smiley_disappointed);
-                mMainBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.warm_grey));
-                mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, R.color.warm_grey));
-                mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, R.color.warm_grey));
+                sad();
                 break;
 
             case NORMAL:
-                mSmileyImage.setImageResource(R.mipmap.smiley_normal);
-                mMainBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.cornflower_blue_65));
-                mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, R.color.cornflower_blue_65));
-                mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, R.color.cornflower_blue_65));
+                normal();
                 break;
 
             case HAPPY:
-                mSmileyImage.setImageResource(R.mipmap.smiley_happy);
-                mMainBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.light_sage));
-                mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, R.color.light_sage));
-                mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, R.color.light_sage));
+                happy();
                 break;
 
             case VERY_HAPPY:
-                mSmileyImage.setImageResource(R.mipmap.smiley_super_happy);
-                mMainBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.banana_yellow));
-                mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, R.color.banana_yellow));
-                mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, R.color.banana_yellow));
+                veryHappy();
                 break;
 
         }
+    }
+
+    private void verySad(){
+        mSmileyImage.setImageResource(R.mipmap.smiley_sad);
+        mMainBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.faded_red));
+        mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, R.color.faded_red));
+        mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, R.color.faded_red));
+    }
+
+    private void sad(){
+        mSmileyImage.setImageResource(R.mipmap.smiley_disappointed);
+        mMainBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.warm_grey));
+        mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, R.color.warm_grey));
+        mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, R.color.warm_grey));
+    }
+
+    private void normal(){
+        mSmileyImage.setImageResource(R.mipmap.smiley_normal);
+        mMainBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.cornflower_blue_65));
+        mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, R.color.cornflower_blue_65));
+        mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, R.color.cornflower_blue_65));
+    }
+
+    private void happy(){
+        mSmileyImage.setImageResource(R.mipmap.smiley_happy);
+        mMainBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.light_sage));
+        mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, R.color.light_sage));
+        mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, R.color.light_sage));
+    }
+
+    private void veryHappy(){
+        mSmileyImage.setImageResource(R.mipmap.smiley_super_happy);
+        mMainBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.banana_yellow));
+        mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, R.color.banana_yellow));
+        mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, R.color.banana_yellow));
     }
 }
