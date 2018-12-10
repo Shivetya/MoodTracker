@@ -1,11 +1,16 @@
 package com.thuillier.guillaume.moodtracker.controller;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -48,7 +53,17 @@ public class MainActivity extends AppCompatActivity {
         mDate = LocalDate.now();
         mStringDate = mDate.format(formatter);
 
+        if (mHistory.getInt("mood : " + mStringDate, -1) != -1){
+            changeMoodVisual(mHistory.getInt("mood : " + mStringDate, -1));
+            mLocationInt = mHistory.getInt("mood : " + mStringDate, -1);
+        }
 
+        mNoteAddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialogComment();
+            }
+        });
     }
 
     public boolean onTouchEvent(MotionEvent event){
@@ -85,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (mLocationInt + 1 < MAX_MOOD) {
             mLocationInt++;
-            changeMoodVisual();
+            changeMoodVisual(mLocationInt);
         }
     }
 
@@ -93,13 +108,13 @@ public class MainActivity extends AppCompatActivity {
 
         if(mLocationInt - 1  >= 0) {
             mLocationInt--;
-            changeMoodVisual();
+            changeMoodVisual(mLocationInt);
         }
     }
 
-    private void changeMoodVisual(){
+    private void changeMoodVisual(int location){
 
-        mActualMood = Mood.fromValues(mLocationInt);
+        mActualMood = Mood.fromValues(location);
 
         switch (mActualMood){
 
@@ -130,6 +145,37 @@ public class MainActivity extends AppCompatActivity {
 
         mHistory.edit().putInt("mood : " + mStringDate, mLocationInt).apply();
         mHistory.edit().putString("comment : " + mStringDate, mCommentMood).apply();
+    }
+
+    private void alertDialogComment(){
+
+        AlertDialog.Builder adBuilder = new AlertDialog.Builder(this);
+
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+        adBuilder.setView(input);
+        adBuilder.setTitle("Commentaire");
+
+        if (mHistory.getString("comment : " + mStringDate, null) != null){
+            input.setText(mHistory.getString("comment : " + mStringDate, null));
+        }
+
+        adBuilder.setPositiveButton("VALIDER", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mCommentMood = input.getText().toString();
+                saveActualMood();
+            }
+        });
+
+        adBuilder.setNegativeButton("ANNULER", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        adBuilder.show();
     }
 
     private void verySad(){
