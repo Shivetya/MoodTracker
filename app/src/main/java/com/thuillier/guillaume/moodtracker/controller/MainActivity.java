@@ -1,5 +1,6 @@
 package com.thuillier.guillaume.moodtracker.controller;
 
+import android.content.SharedPreferences;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,8 +9,11 @@ import android.view.MotionEvent;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.thuillier.guillaume.moodtracker.R;
 import com.thuillier.guillaume.moodtracker.model.*;
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.format.DateTimeFormatter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,14 +22,20 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton mHistoryButton;
     private RelativeLayout mMainBackground;
     private GestureDetector mGestureListener;
-    private final int MAX_MOOD = 5;
+    private static final int MAX_MOOD = 5;
     private int mLocationInt = 3;
     private Mood mActualMood;
+    private LocalDate mDate;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
+    private String mStringDate;
+    private SharedPreferences mHistory;
+    private String mCommentMood = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        AndroidThreeTen.init(this);
 
         mSmileyImage = findViewById(R.id.activity_main_image_smiley);
         mNoteAddButton = findViewById(R.id.activity_main_note_add_button);
@@ -33,7 +43,10 @@ public class MainActivity extends AppCompatActivity {
         mMainBackground = findViewById(R.id.activity_main_background);
 
         mGestureListener = new GestureDetector(this, new MySimpleGestureListener());
+        mHistory = getSharedPreferences("History.History",MODE_PRIVATE);
 
+        mDate = LocalDate.now();
+        mStringDate = mDate.format(formatter);
 
 
     }
@@ -52,6 +65,19 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         else return false;
+    }
+
+    public void onStop(){
+
+        saveActualMood();
+        super.onStop();
+    }
+
+    public void onResume() {
+
+        super.onResume();
+        mDate = LocalDate.now();
+        mStringDate = mDate.format(formatter);
     }
 
 
@@ -98,6 +124,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
         }
+    }
+
+    private void saveActualMood(){
+
+        mHistory.edit().putInt("mood : " + mStringDate, mLocationInt).apply();
+        mHistory.edit().putString("comment : " + mStringDate, mCommentMood).apply();
     }
 
     private void verySad(){
