@@ -54,8 +54,9 @@ public class MainActivity extends AppCompatActivity {
         mStringDate = mDate.format(formatter);
 
         if (mHistory.getInt("mood : " + mStringDate, -1) != -1){
-            changeMoodVisual(mHistory.getInt("mood : " + mStringDate, -1));
             mLocationInt = mHistory.getInt("mood : " + mStringDate, -1);
+            changeMoodVisual(mLocationInt);
+            mCommentMood = mHistory.getString("comment : " + mStringDate, null);
         }
 
         mNoteAddButton.setOnClickListener(new View.OnClickListener() {
