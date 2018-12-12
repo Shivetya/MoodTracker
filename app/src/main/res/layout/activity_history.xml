@@ -6,138 +6,144 @@
     android:layout_height="match_parent"
     tools:context=".controller.HistoryActivity">
 
-    <LinearLayout
-        android:id="@+id/firstLL"
-        android:layout_width="match_parent"
+    <TextView
+        android:text="@string/il_y_a_une_semaine"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:paddingStart="5dp"
+        android:paddingTop="5dp"
+        android:id="@+id/history_activity_first_TV"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.1428"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.80"
         app:layout_constraintTop_toTopOf="parent"
-        android:weightSum="5">
+        android:background="@color/light_sage"
+        android:drawableEnd="@mipmap/ic_comment_black_48px"
+        android:paddingEnd="20dp"
+        android:clickable="true"
+        android:focusable="true" />
 
-        <TextView
-            android:id="@+id/history_activity_first_TV"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:background="@color/light_sage"
-            android:drawableEnd="@mipmap/ic_comment_black_48px"
-            android:paddingEnd="20dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/secondLL"
-        android:layout_width="match_parent"
+    <TextView
+        android:text="@string/il_y_a_six_jours"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:paddingStart="5dp"
+        android:paddingTop="5dp"
+        android:id="@+id/history_activity_second_TV"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.1428"
-        app:layout_constraintTop_toBottomOf="@id/firstLL"
-        android:weightSum="5">
-        <TextView
-            android:id="@+id/history_activity_second_TV"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:background="@color/light_sage"
-            android:drawableEnd="@mipmap/ic_comment_black_48px"
-            android:paddingEnd="20dp"/>
-    </LinearLayout>
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.80"
+        app:layout_constraintTop_toBottomOf="@id/history_activity_first_TV"
+        android:background="@color/light_sage"
+        android:drawableEnd="@mipmap/ic_comment_black_48px"
+        android:paddingEnd="20dp"
+        android:clickable="true"
+        android:focusable="true"/>
 
-    <LinearLayout
-        android:id="@+id/thirdLL"
-        android:layout_width="match_parent"
+    <TextView
+        android:text="@string/il_y_a_cinq_jours"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:paddingStart="5dp"
+        android:paddingTop="5dp"
+        android:id="@+id/history_activity_third_TV"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.1428"
-        app:layout_constraintTop_toBottomOf="@id/secondLL"
-        android:weightSum="5">
-        <TextView
-            android:id="@+id/history_activity_third_TV"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:background="@color/light_sage"
-            android:drawableEnd="@mipmap/ic_comment_black_48px"
-            android:paddingEnd="20dp"/>
-    </LinearLayout>
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.80"
+        app:layout_constraintTop_toBottomOf="@id/history_activity_second_TV"
+        android:background="@color/light_sage"
+        android:drawableEnd="@mipmap/ic_comment_black_48px"
+        android:paddingEnd="20dp"
+        android:clickable="true"
+        android:focusable="true"/>
 
-    <LinearLayout
-        android:id="@+id/fourthLL"
-        android:layout_width="match_parent"
+    <TextView
+        android:text="@string/il_y_a_quatre_jours"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:paddingStart="5dp"
+        android:paddingTop="5dp"
+        android:id="@+id/history_activity_fourth_TV"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.1428"
-        app:layout_constraintTop_toBottomOf="@id/thirdLL"
-        android:weightSum="5">
-        <TextView
-            android:id="@+id/history_activity_fourth_TV"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:background="@color/light_sage"
-            android:drawableEnd="@mipmap/ic_comment_black_48px"
-            android:paddingEnd="20dp"/>
-    </LinearLayout>
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.800"
+        app:layout_constraintTop_toBottomOf="@id/history_activity_third_TV"
+        android:background="@color/light_sage"
+        android:drawableEnd="@mipmap/ic_comment_black_48px"
+        android:paddingEnd="20dp"
+        android:clickable="true"
+        android:focusable="true"/>
 
-    <LinearLayout
-        android:id="@+id/fifthLL"
-        android:layout_width="match_parent"
+    <TextView
+        android:text="@string/il_y_a_trois_jours"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:paddingStart="5dp"
+        android:paddingTop="5dp"
+        android:id="@+id/history_activity_fifth_TV"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.1428"
-        app:layout_constraintTop_toBottomOf="@id/fourthLL"
-        android:weightSum="5">
-        <TextView
-            android:id="@+id/history_activity_fifth_TV"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:background="@color/light_sage"
-            android:drawableEnd="@mipmap/ic_comment_black_48px"
-            android:paddingEnd="20dp"/>
-    </LinearLayout>
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.80"
+        app:layout_constraintTop_toBottomOf="@id/history_activity_fourth_TV"
+        android:background="@color/light_sage"
+        android:drawableEnd="@mipmap/ic_comment_black_48px"
+        android:paddingEnd="20dp"
+        android:clickable="true"
+        android:focusable="true"/>
 
-    <LinearLayout
-        android:id="@+id/sixthLL"
-        android:layout_width="match_parent"
+    <TextView
+        android:text="@string/avant_hier"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:paddingStart="5dp"
+        android:paddingTop="5dp"
+        android:id="@+id/history_activity_sixth_TV"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.1428"
-        app:layout_constraintTop_toBottomOf="@id/fifthLL"
-        android:weightSum="5">
-        <TextView
-            android:id="@+id/history_activity_sixth_TV"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:background="@color/light_sage"
-            android:drawableEnd="@mipmap/ic_comment_black_48px"
-            android:paddingEnd="20dp"/>
-    </LinearLayout>
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.80"
+        app:layout_constraintTop_toBottomOf="@id/history_activity_fifth_TV"
+        android:background="@color/light_sage"
+        android:drawableEnd="@mipmap/ic_comment_black_48px"
+        android:paddingEnd="20dp"
+        android:clickable="true"
+        android:focusable="true"/>
 
-    <LinearLayout
-        android:id="@+id/seventhLL"
-        android:layout_width="match_parent"
+    <TextView
+        android:text="@string/hier"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:paddingStart="5dp"
+        android:paddingTop="5dp"
+        android:id="@+id/history_activity_seventh_TV"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.1428"
-        app:layout_constraintTop_toBottomOf="@id/sixthLL"
-        android:weightSum="5">
-        <TextView
-            android:id="@+id/history_activity_seventh_TV"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:background="@color/light_sage"
-            android:drawableEnd="@mipmap/ic_comment_black_48px"
-            android:paddingEnd="20dp"/>
-    </LinearLayout>
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.80"
+        app:layout_constraintTop_toBottomOf="@id/history_activity_sixth_TV"
+        android:background="@color/light_sage"
+        android:drawableEnd="@mipmap/ic_comment_black_48px"
+        android:paddingEnd="20dp"
+        android:clickable="true"
+        android:focusable="true"/>
 
 </android.support.constraint.ConstraintLayout>

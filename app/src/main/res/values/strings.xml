@@ -3,4 +3,11 @@
     <string name="smiley_happy">Smiley Happy</string>
     <string name="note_add_button">Note add button</string>
     <string name="history_button">History button</string>
+    <string name="il_y_a_une_semaine">Il y a une semaine</string>
+    <string name="il_y_a_six_jours">Il y a six jours</string>
+    <string name="il_y_a_cinq_jours">Il y a cinq jours</string>
+    <string name="il_y_a_quatre_jours">Il y a quatre jours</string>
+    <string name="il_y_a_trois_jours">Il y a trois jours</string>
+    <string name="avant_hier">Avant-hier</string>
+    <string name="hier">Hier</string>
 </resources>
