@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".controller.HistoryActivity">
 
     <LinearLayout
+        android:id="@+id/firstLL"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.1428"
+        app:layout_constraintTop_toTopOf="parent"
         android:weightSum="5">
 
         <TextView
+            android:id="@+id/history_activity_first_TV"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
@@ -23,11 +27,16 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/secondLL"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.1428"
+        app:layout_constraintTop_toBottomOf="@id/firstLL"
         android:weightSum="5">
         <TextView
+            android:id="@+id/history_activity_second_TV"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
@@ -37,11 +46,16 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/thirdLL"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.1428"
+        app:layout_constraintTop_toBottomOf="@id/secondLL"
         android:weightSum="5">
         <TextView
+            android:id="@+id/history_activity_third_TV"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
@@ -51,11 +65,16 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/fourthLL"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.1428"
+        app:layout_constraintTop_toBottomOf="@id/thirdLL"
         android:weightSum="5">
         <TextView
+            android:id="@+id/history_activity_fourth_TV"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
@@ -65,11 +84,16 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/fifthLL"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.1428"
+        app:layout_constraintTop_toBottomOf="@id/fourthLL"
         android:weightSum="5">
         <TextView
+            android:id="@+id/history_activity_fifth_TV"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
@@ -79,11 +103,16 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/sixthLL"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.1428"
+        app:layout_constraintTop_toBottomOf="@id/fifthLL"
         android:weightSum="5">
         <TextView
+            android:id="@+id/history_activity_sixth_TV"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
@@ -93,11 +122,16 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/seventhLL"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.1428"
+        app:layout_constraintTop_toBottomOf="@id/sixthLL"
         android:weightSum="5">
         <TextView
+            android:id="@+id/history_activity_seventh_TV"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
@@ -106,4 +140,4 @@
             android:paddingEnd="20dp"/>
     </LinearLayout>
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
