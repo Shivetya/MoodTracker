@@ -1,32 +1,36 @@
 package com.thuillier.guillaume.moodtracker.model;
 
+import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
+import com.thuillier.guillaume.moodtracker.R;
+
 public enum Mood {
-    VERY_SAD (0),
-    SAD (1),
-    NORMAL (2),
-    HAPPY (3),
-    VERY_HAPPY (4);
+    VERY_SAD (R.color.faded_red, R.mipmap.smiley_sad),
+    SAD (R.color.warm_grey, R.mipmap.smiley_disappointed),
+    NORMAL (R.color.cornflower_blue_65, R.mipmap.smiley_normal),
+    HAPPY (R.color.light_sage, R.mipmap.smiley_happy),
+    VERY_HAPPY (R.color.banana_yellow, R.mipmap.smiley_super_happy);
 
-    int mNumber;
+    @ColorRes
+    int mNumberColor;
+    @DrawableRes
+    int mSmileyImage;
 
-    Mood(int number) {
-        mNumber = number;
+    Mood(@ColorRes int numberColor, @DrawableRes int mSmileyImage) {
+        mNumberColor = numberColor;
     }
 
-    public int getNumber() {
-        return mNumber;
+    @ColorRes
+    public int getNumberColor() {
+        return mNumberColor;
     }
 
-    public static Mood fromValues(Integer number){
+    @DrawableRes
+    public int getSmileyImage() {
+        return mSmileyImage;
+    }
 
-        Mood moodTested = null;
-
-        for (Mood m : Mood.values()){
-            if (number == m.getNumber()){
-                moodTested = m;
-            }
-        }
-
-        return moodTested;
+    public static Mood fromValues(Integer number) {
+        return Mood.values()[number];
     }
 }

@@ -27,12 +27,10 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton mHistoryButton;
     private RelativeLayout mMainBackground;
     private GestureDetector mGestureListener;
-    private static final int MAX_MOOD = 5;
-    private int mLocationInt = 3;
+    private static final int MAX_MOOD = Mood.values().length;
+    private int mLocationInt = (MAX_MOOD+1) /2;
     private Mood mActualMood;
-    private LocalDate mDate;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
-    private String mStringDate;
     private SharedPreferences mHistory;
     private String mCommentMood = null;
 
@@ -50,13 +48,10 @@ public class MainActivity extends AppCompatActivity {
         mGestureListener = new GestureDetector(this, new MySimpleGestureListener());
         mHistory = getSharedPreferences("History.History",MODE_PRIVATE);
 
-        mDate = LocalDate.now();
-        mStringDate = mDate.format(formatter);
-
-        if (mHistory.getInt("mood : " + mStringDate, -1) != -1){
-            mLocationInt = mHistory.getInt("mood : " + mStringDate, -1);
+        if (mHistory.getInt("mood : " + getStringDate(), -1) != -1){
+            mLocationInt = mHistory.getInt("mood : " + getStringDate(), -1);
             changeMoodVisual(mLocationInt);
-            mCommentMood = mHistory.getString("comment : " + mStringDate, null);
+            mCommentMood = mHistory.getString("comment : " + getStringDate(), null);
         }
 
         mNoteAddButton.setOnClickListener(new View.OnClickListener() {
@@ -89,14 +84,6 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
     }
 
-    public void onResume() {
-
-        super.onResume();
-        mDate = LocalDate.now();
-        mStringDate = mDate.format(formatter);
-    }
-
-
     private void swipeUp(){
 
         if (mLocationInt + 1 < MAX_MOOD) {
@@ -117,35 +104,18 @@ public class MainActivity extends AppCompatActivity {
 
         mActualMood = Mood.fromValues(location);
 
-        switch (mActualMood){
-
-            case VERY_SAD:
-                verySad();
-                break;
-
-            case SAD:
-                sad();
-                break;
-
-            case NORMAL:
-                normal();
-                break;
-
-            case HAPPY:
-                happy();
-                break;
-
-            case VERY_HAPPY:
-                veryHappy();
-                break;
-
-        }
+        mSmileyImage.setImageResource(mActualMood.getSmileyImage());
+        mMainBackground.setBackgroundColor(ContextCompat.getColor(this, mActualMood.getNumberColor()));
+        mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, mActualMood.getNumberColor()));
+        mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, mActualMood.getNumberColor()));
     }
 
     private void saveActualMood(){
 
-        mHistory.edit().putInt("mood : " + mStringDate, mLocationInt).apply();
-        mHistory.edit().putString("comment : " + mStringDate, mCommentMood).apply();
+        LocalDate date = LocalDate.now();
+        String stringDate = date.format(formatter);
+        mHistory.edit().putInt("mood : " + stringDate, mLocationInt).apply();
+        mHistory.edit().putString("comment : " + stringDate, mCommentMood).apply();
     }
 
     private void alertDialogComment(){
@@ -157,8 +127,8 @@ public class MainActivity extends AppCompatActivity {
         adBuilder.setView(input);
         adBuilder.setTitle("Commentaire");
 
-        if (mHistory.getString("comment : " + mStringDate, null) != null){
-            input.setText(mHistory.getString("comment : " + mStringDate, null));
+        if (mHistory.getString("comment : " + getStringDate(), null) != null){
+            input.setText(mHistory.getString("comment : " + getStringDate(), null));
         }
 
         adBuilder.setPositiveButton("VALIDER", new DialogInterface.OnClickListener() {
@@ -179,38 +149,9 @@ public class MainActivity extends AppCompatActivity {
         adBuilder.show();
     }
 
-    private void verySad(){
-        mSmileyImage.setImageResource(R.mipmap.smiley_sad);
-        mMainBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.faded_red));
-        mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, R.color.faded_red));
-        mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, R.color.faded_red));
-    }
+    private String getStringDate(){
+        LocalDate date = LocalDate.now();
+        return date.format(formatter);
 
-    private void sad(){
-        mSmileyImage.setImageResource(R.mipmap.smiley_disappointed);
-        mMainBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.warm_grey));
-        mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, R.color.warm_grey));
-        mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, R.color.warm_grey));
-    }
-
-    private void normal(){
-        mSmileyImage.setImageResource(R.mipmap.smiley_normal);
-        mMainBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.cornflower_blue_65));
-        mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, R.color.cornflower_blue_65));
-        mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, R.color.cornflower_blue_65));
-    }
-
-    private void happy(){
-        mSmileyImage.setImageResource(R.mipmap.smiley_happy);
-        mMainBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.light_sage));
-        mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, R.color.light_sage));
-        mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, R.color.light_sage));
-    }
-
-    private void veryHappy(){
-        mSmileyImage.setImageResource(R.mipmap.smiley_super_happy);
-        mMainBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.banana_yellow));
-        mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, R.color.banana_yellow));
-        mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, R.color.banana_yellow));
     }
 }
