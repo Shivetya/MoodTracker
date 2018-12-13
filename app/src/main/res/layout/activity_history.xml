@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.HistoryActivity">
+    tools:context=".controller.HistoryActivity"
+    android:id="@+id/history_activity_constraint_layout">
 
     <TextView
         android:text="@string/il_y_a_une_semaine"

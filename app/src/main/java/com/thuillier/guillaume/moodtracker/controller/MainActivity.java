@@ -1,6 +1,7 @@
 package com.thuillier.guillaume.moodtracker.controller;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int MAX_MOOD = Mood.values().length;
     private int mLocationInt = (MAX_MOOD+1) /2;
     private Mood mActualMood;
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
+    public final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
     private SharedPreferences mHistory;
     private String mCommentMood = null;
 
@@ -58,6 +59,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 alertDialogComment();
+            }
+        });
+
+        mHistoryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent historyActivityIntent = new Intent (MainActivity.this, HistoryActivity.class);
+                startActivity(historyActivityIntent);
             }
         });
     }
