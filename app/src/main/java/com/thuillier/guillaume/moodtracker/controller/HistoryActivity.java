@@ -66,6 +66,7 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
 
             if (mHistory.getString("comment : " + date.minusDays(i).format(MainActivity.formatter), null ) != null) {
                 mTv[i - 1].setOnClickListener(this);
+                mTv[i - 1].setCompoundDrawablesWithIntrinsicBounds(0,0,R.mipmap.ic_comment_black_48px,0);
                 mComments[i - 1] = mHistory.getString("comment : " + date.minusDays(i).format(MainActivity.formatter), null );
             }
         }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grey"
     tools:context=".controller.HistoryActivity"
     android:id="@+id/history_activity_constraint_layout">
 
@@ -22,7 +23,7 @@
         app:layout_constraintWidth_percent="0.80"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/light_sage"
-        android:drawableEnd="@mipmap/ic_comment_black_48px"
+        android:drawablePadding="-300dp"
         android:paddingEnd="20dp"
         android:clickable="true"
         android:focusable="true" />
@@ -42,7 +43,7 @@
         app:layout_constraintWidth_percent="0.80"
         app:layout_constraintTop_toBottomOf="@id/history_activity_first_TV"
         android:background="@color/light_sage"
-        android:drawableEnd="@mipmap/ic_comment_black_48px"
+        android:drawablePadding="-300dp"
         android:paddingEnd="20dp"
         android:clickable="true"
         android:focusable="true"/>
@@ -62,7 +63,7 @@
         app:layout_constraintWidth_percent="0.80"
         app:layout_constraintTop_toBottomOf="@id/history_activity_second_TV"
         android:background="@color/light_sage"
-        android:drawableEnd="@mipmap/ic_comment_black_48px"
+        android:drawablePadding="-300dp"
         android:paddingEnd="20dp"
         android:clickable="true"
         android:focusable="true"/>
@@ -79,10 +80,10 @@
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.1428"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.800"
+        app:layout_constraintWidth_percent="0.80"
         app:layout_constraintTop_toBottomOf="@id/history_activity_third_TV"
         android:background="@color/light_sage"
-        android:drawableEnd="@mipmap/ic_comment_black_48px"
+        android:drawablePadding="-300dp"
         android:paddingEnd="20dp"
         android:clickable="true"
         android:focusable="true"/>
@@ -102,13 +103,14 @@
         app:layout_constraintWidth_percent="0.80"
         app:layout_constraintTop_toBottomOf="@id/history_activity_fourth_TV"
         android:background="@color/light_sage"
-        android:drawableEnd="@mipmap/ic_comment_black_48px"
+        android:drawablePadding="-300dp"
         android:paddingEnd="20dp"
         android:clickable="true"
         android:focusable="true"/>
 
     <TextView
         android:text="@string/avant_hier"
+        android:maxLines="1"
         android:textSize="12sp"
         android:textStyle="bold"
         android:paddingStart="5dp"
@@ -122,7 +124,7 @@
         app:layout_constraintWidth_percent="0.80"
         app:layout_constraintTop_toBottomOf="@id/history_activity_fifth_TV"
         android:background="@color/light_sage"
-        android:drawableEnd="@mipmap/ic_comment_black_48px"
+        android:drawablePadding="-300dp"
         android:paddingEnd="20dp"
         android:clickable="true"
         android:focusable="true"/>
@@ -142,7 +144,7 @@
         app:layout_constraintWidth_percent="0.80"
         app:layout_constraintTop_toBottomOf="@id/history_activity_sixth_TV"
         android:background="@color/light_sage"
-        android:drawableEnd="@mipmap/ic_comment_black_48px"
+        android:drawablePadding="-300dp"
         android:paddingEnd="20dp"
         android:clickable="true"
         android:focusable="true"/>
