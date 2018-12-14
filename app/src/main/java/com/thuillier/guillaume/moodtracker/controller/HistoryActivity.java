@@ -25,13 +25,13 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_history);
         mHistory = getSharedPreferences("History.History",MODE_PRIVATE);
 
-        mTv[0] = findViewById(R.id.history_activity_first_TV);
-        mTv[1] = findViewById(R.id.history_activity_second_TV);
-        mTv[2] = findViewById(R.id.history_activity_third_TV);
+        mTv[6] = findViewById(R.id.history_activity_first_TV);
+        mTv[5] = findViewById(R.id.history_activity_second_TV);
+        mTv[4] = findViewById(R.id.history_activity_third_TV);
         mTv[3] = findViewById(R.id.history_activity_fourth_TV);
-        mTv[4] = findViewById(R.id.history_activity_fifth_TV);
-        mTv[5] = findViewById(R.id.history_activity_sixth_TV);
-        mTv[6] = findViewById(R.id.history_activity_seventh_TV);
+        mTv[2] = findViewById(R.id.history_activity_fifth_TV);
+        mTv[1] = findViewById(R.id.history_activity_sixth_TV);
+        mTv[0] = findViewById(R.id.history_activity_seventh_TV);
 
         setVisualAndComments();
     }
@@ -56,18 +56,18 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
         set.clone(constrainLayout);
         Mood mood;
 
-        for (int i = 1; i <= mTv.length; i++) {
+        for (int i = 0; i < mTv.length; i++) {
 
-            mood = Mood.fromValues(mHistory.getInt("mood : " + date.minusDays(i).format(MainActivity.formatter), 3));
+            mood = Mood.fromValues(mHistory.getInt("mood : " + date.minusDays(i + 1).format(MainActivity.formatter), 3));
 
-            set.constrainPercentWidth(mTv[i - 1].getId(), mood.getPercent());
+            set.constrainPercentWidth(mTv[i].getId(), mood.getPercent());
             set.applyTo(constrainLayout);
-            mTv[i - 1].setBackgroundColor(ContextCompat.getColor(this, mood.getNumberColor()));
+            mTv[i].setBackgroundColor(ContextCompat.getColor(this, mood.getNumberColor()));
 
-            if (mHistory.getString("comment : " + date.minusDays(i).format(MainActivity.formatter), null ) != null) {
-                mTv[i - 1].setOnClickListener(this);
-                mTv[i - 1].setCompoundDrawablesWithIntrinsicBounds(0,0,R.mipmap.ic_comment_black_48px,0);
-                mComments[i - 1] = mHistory.getString("comment : " + date.minusDays(i).format(MainActivity.formatter), null );
+            if (mHistory.getString("comment : " + date.minusDays(i + 1).format(MainActivity.formatter), null ) != null) {
+                mTv[i].setOnClickListener(this);
+                mTv[i].setCompoundDrawablesWithIntrinsicBounds(0,0,R.mipmap.ic_comment_black_48px,0);
+                mComments[i] = mHistory.getString("comment : " + date.minusDays(i + 1).format(MainActivity.formatter), null );
             }
         }
     }

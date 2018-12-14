@@ -30,8 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private GestureDetector mGestureListener;
     private static final int MAX_MOOD = Mood.values().length;
     private int mLocationInt = (MAX_MOOD+1) /2;
-    private Mood mActualMood;
-    public final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
+    final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
     private SharedPreferences mHistory;
     private String mCommentMood = null;
 
@@ -111,12 +110,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void changeMoodVisual(int location){
 
-        mActualMood = Mood.fromValues(location);
+        Mood actualMood = Mood.fromValues(location);
 
-        mSmileyImage.setImageResource(mActualMood.getSmileyImage());
-        mMainBackground.setBackgroundColor(ContextCompat.getColor(this, mActualMood.getNumberColor()));
-        mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, mActualMood.getNumberColor()));
-        mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, mActualMood.getNumberColor()));
+        mSmileyImage.setImageResource(actualMood.getSmileyImage());
+        mMainBackground.setBackgroundColor(ContextCompat.getColor(this, actualMood.getNumberColor()));
+        mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, actualMood.getNumberColor()));
+        mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, actualMood.getNumberColor()));
     }
 
     private void saveActualMood(){
@@ -159,8 +158,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String getStringDate(){
+
         LocalDate date = LocalDate.now();
         return date.format(formatter);
-
     }
 }
