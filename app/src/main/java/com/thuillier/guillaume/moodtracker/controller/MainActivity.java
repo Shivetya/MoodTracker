@@ -11,10 +11,7 @@ import android.text.InputType;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.*;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.thuillier.guillaume.moodtracker.R;
 import com.thuillier.guillaume.moodtracker.model.*;
@@ -27,12 +24,14 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton mNoteAddButton;
     private ImageButton mHistoryButton;
     private RelativeLayout mMainBackground;
+    private TextView mShareTv;
     private GestureDetector mGestureListener;
     private static final int MAX_MOOD = Mood.values().length;
     private int mLocationInt = (MAX_MOOD+1) /2;
     final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
     private SharedPreferences mHistory;
     private String mCommentMood = null;
+    private Mood mActualMood;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         mNoteAddButton = findViewById(R.id.activity_main_note_add_button);
         mHistoryButton = findViewById(R.id.activity_main_history_button);
         mMainBackground = findViewById(R.id.activity_main_background);
+        mShareTv = findViewById(R.id.activity_main_share_textview);
 
         mGestureListener = new GestureDetector(this, new MySimpleGestureListener());
         mHistory = getSharedPreferences("History.History",MODE_PRIVATE);
@@ -66,6 +66,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent historyActivityIntent = new Intent (MainActivity.this, HistoryActivity.class);
                 startActivity(historyActivityIntent);
+            }
+        });
+
+        mShareTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareMood();
             }
         });
     }
@@ -110,12 +117,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void changeMoodVisual(int location){
 
-        Mood actualMood = Mood.fromValues(location);
+        mActualMood = Mood.fromValues(location);
 
-        mSmileyImage.setImageResource(actualMood.getSmileyImage());
-        mMainBackground.setBackgroundColor(ContextCompat.getColor(this, actualMood.getNumberColor()));
-        mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, actualMood.getNumberColor()));
-        mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, actualMood.getNumberColor()));
+        mSmileyImage.setImageResource(mActualMood.getSmileyImage());
+        mMainBackground.setBackgroundColor(ContextCompat.getColor(this, mActualMood.getNumberColor()));
+        mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, mActualMood.getNumberColor()));
+        mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, mActualMood.getNumberColor()));
     }
 
     private void saveActualMood(){
@@ -161,5 +168,19 @@ public class MainActivity extends AppCompatActivity {
 
         LocalDate date = LocalDate.now();
         return date.format(formatter);
+    }
+
+    private void shareMood(){
+
+        String stringToShare = "Hello ! Je suis aujourd'hui d'humeur " + mActualMood.getDescription() + " !";
+
+        if (mCommentMood != null){
+            stringToShare += "\n Voilà pourquoi : " + mCommentMood;
+        }
+
+        Intent shareMood = new Intent(Intent.ACTION_SEND);
+        shareMood.setType("text/plain");
+        shareMood.putExtra(Intent.EXTRA_TEXT, stringToShare);
+        startActivity(shareMood);
     }
 }

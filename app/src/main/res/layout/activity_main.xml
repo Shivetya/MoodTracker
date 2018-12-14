@@ -39,4 +39,17 @@
         android:contentDescription="@string/history_button"
         android:src="@mipmap/ic_history_black" />
 
+    <TextView
+        android:id="@+id/activity_main_share_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:text="@string/share"
+        android:textColor="@color/black"
+        tools:ignore="RelativeOverlap" />
+
 </RelativeLayout>
