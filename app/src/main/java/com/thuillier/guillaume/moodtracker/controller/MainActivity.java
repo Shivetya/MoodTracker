@@ -129,14 +129,20 @@ public class MainActivity extends AppCompatActivity {
         mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, mActualMood.getNumberColor()));
     }
 
+    /**
+     * This method ask the date to save the int of the mood and the comment in history.history thanks to SharedPreferences.
+     */
+
     private void saveActualMood(){
 
-        LocalDate date = LocalDate.now();
-        String stringDate = date.format(formatter);
+        String stringDate = getStringDate();
         mHistory.edit().putInt("mood : " + stringDate, mLocationInt).apply();
         mHistory.edit().putString("comment : " + stringDate, mCommentMood).apply();
     }
 
+    /**
+     * Method that create and display a dialog box. The user can write a comment, it will be saved and display when wanted.
+     */
     private void alertDialogComment(){
 
         AlertDialog.Builder adBuilder = new AlertDialog.Builder(this);
@@ -174,6 +180,10 @@ public class MainActivity extends AppCompatActivity {
         return date.format(formatter);
     }
 
+
+    /**
+     * Method that allow to share the description of the mood with the comment (if it exists).
+     */
     private void shareMood(){
 
         String stringToShare = "Hello ! Je suis aujourd'hui d'humeur " + mActualMood.getDescription() + " !";

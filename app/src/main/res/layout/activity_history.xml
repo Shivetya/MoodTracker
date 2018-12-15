@@ -9,7 +9,7 @@
     android:id="@+id/history_activity_constraint_layout">
 
     <TextView
-        android:text="@string/il_y_a_une_semaine"
+        android:text="@string/a_week_ago"
         android:textSize="12sp"
         android:textStyle="bold"
         android:paddingStart="5dp"
@@ -29,7 +29,7 @@
         android:focusable="true" />
 
     <TextView
-        android:text="@string/il_y_a_six_jours"
+        android:text="@string/six_days_ago"
         android:textSize="12sp"
         android:textStyle="bold"
         android:paddingStart="5dp"
@@ -49,7 +49,7 @@
         android:focusable="true"/>
 
     <TextView
-        android:text="@string/il_y_a_cinq_jours"
+        android:text="@string/five_days_ago"
         android:textSize="12sp"
         android:textStyle="bold"
         android:paddingStart="5dp"
@@ -69,7 +69,7 @@
         android:focusable="true"/>
 
     <TextView
-        android:text="@string/il_y_a_quatre_jours"
+        android:text="@string/four_days_ago"
         android:textSize="12sp"
         android:textStyle="bold"
         android:paddingStart="5dp"
@@ -89,7 +89,7 @@
         android:focusable="true"/>
 
     <TextView
-        android:text="@string/il_y_a_trois_jours"
+        android:text="@string/three_days_ago"
         android:textSize="12sp"
         android:textStyle="bold"
         android:paddingStart="5dp"
@@ -109,7 +109,7 @@
         android:focusable="true"/>
 
     <TextView
-        android:text="@string/avant_hier"
+        android:text="@string/two_days_ago"
         android:maxLines="1"
         android:textSize="12sp"
         android:textStyle="bold"
@@ -130,7 +130,7 @@
         android:focusable="true"/>
 
     <TextView
-        android:text="@string/hier"
+        android:text="@string/yesterday"
         android:textSize="12sp"
         android:textStyle="bold"
         android:paddingStart="5dp"

@@ -48,6 +48,12 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
+    /**
+     * This method check if mood and comment exist for the past week. if there are, each bars will have width associated
+     * to the mood and an icon. If there is only mood saved and not comment, there will be no icon.
+     * If there is no mood saved, the mood "HAPPY" and no comment is by default.
+     */
+
     private void setVisualAndComments(){
 
         LocalDate date = LocalDate.now();
