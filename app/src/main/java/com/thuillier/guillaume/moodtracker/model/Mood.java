@@ -4,6 +4,12 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import com.thuillier.guillaume.moodtracker.R;
 
+/**
+ * This enum allow us to keep every information of each mood in one place.
+ * We have here each smiley image, colors, percent for bars in HistoryActivity and description used for the sharing.
+ * mNumberColor must be ColorRes, mSmileyImage must be DrawableRes.
+ */
+
 public enum Mood {
     VERY_SAD (R.color.faded_red, R.mipmap.smiley_sad, 0.2f, "très mauvaise"),
     SAD (R.color.warm_grey, R.mipmap.smiley_disappointed, 0.4f, "mauvaise"),

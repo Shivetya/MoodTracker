@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton mNoteAddButton;
     private ImageButton mHistoryButton;
     private RelativeLayout mMainBackground;
-    private TextView mShareTv;
     private GestureDetector mGestureListener;
     private static final int MAX_MOOD = Mood.values().length;
     private int mLocationInt = (MAX_MOOD+1) /2;
@@ -43,12 +42,13 @@ public class MainActivity extends AppCompatActivity {
         mNoteAddButton = findViewById(R.id.activity_main_note_add_button);
         mHistoryButton = findViewById(R.id.activity_main_history_button);
         mMainBackground = findViewById(R.id.activity_main_background);
-        mShareTv = findViewById(R.id.activity_main_share_textview);
+        TextView shareTv = findViewById(R.id.activity_main_share_textview);
 
         mGestureListener = new GestureDetector(this, new MySimpleGestureListener());
         mHistory = getSharedPreferences("History.History",MODE_PRIVATE);
 
-        if (mHistory.getInt("mood : " + getStringDate(), -1) != -1){
+        if (mHistory.getInt("mood : " + getStringDate(), -1) != -1) {
+
             mLocationInt = mHistory.getInt("mood : " + getStringDate(), -1);
             changeMoodVisual(mLocationInt);
             mCommentMood = mHistory.getString("comment : " + getStringDate(), null);
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mShareTv.setOnClickListener(new View.OnClickListener() {
+        shareTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 shareMood();
@@ -115,6 +115,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method change everything that depends on the active mood : smiley, background color, background color of buttons.
+     * @param location = mLocationInt, that allow program to know which mood to display.
+     */
     private void changeMoodVisual(int location){
 
         mActualMood = Mood.fromValues(location);
