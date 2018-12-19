@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void shareMood(){
 
-        String stringToShare = "Hello ! Je suis aujourd'hui d'humeur " + mActualMood.getDescription() + " !";
+        String stringToShare = "Hello ! Je suis aujourd'hui d'humeur " + getString(mActualMood.getDescription()) + " !";
 
         if (mCommentMood != null){
             stringToShare += "\n Voilà pourquoi : " + mCommentMood;

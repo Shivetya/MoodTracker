@@ -2,6 +2,7 @@ package com.thuillier.guillaume.moodtracker.model;
 
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
 import com.thuillier.guillaume.moodtracker.R;
 
 /**
@@ -11,7 +12,7 @@ import com.thuillier.guillaume.moodtracker.R;
  */
 
 public enum Mood {
-    VERY_SAD (R.color.faded_red, R.mipmap.smiley_sad, 0.2f, "très mauvaise"),
+    VERY_SAD (R.color.faded_red, R.mipmap.smiley_sad, 0.2f, R.string.very_bad),
     SAD (R.color.warm_grey, R.mipmap.smiley_disappointed, 0.4f, "mauvaise"),
     NORMAL (R.color.cornflower_blue_65, R.mipmap.smiley_normal, 0.6f, "normale"),
     HAPPY (R.color.light_sage, R.mipmap.smiley_happy,0.8f,"heureuse"),
@@ -24,9 +25,11 @@ public enum Mood {
         int mSmileyImage;
 
         float mPercent;
-        String mDescription;
 
-        Mood(@ColorRes int numberColor, @DrawableRes int smileyImage, float percent, String description) {
+        @StringRes
+        int mDescription;
+
+        Mood(@ColorRes int numberColor, @DrawableRes int smileyImage, float percent, @StringRes int description) {
             mNumberColor = numberColor;
             mSmileyImage = smileyImage;
             mPercent = percent;
@@ -51,7 +54,8 @@ public enum Mood {
         return mPercent;
     }
 
-    public String getDescription() {
+    @StringRes
+    public int getDescription() {
         return mDescription;
     }
 }

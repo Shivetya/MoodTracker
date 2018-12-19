@@ -3,9 +3,7 @@ package com.thuillier.guillaume.moodtracker.model;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
-/**
- * This class extends GestureDetector.SimpleOnGestureListener, it allow to catch the user action on the screen.
- * Here, the method "onFling" is override, that allow us to know, if the user swipe vertically, in which orientation
+/**Here, the method "onFling" is override, that allow us to know, if the user swipe vertically, in which orientation
  * the swipe is done.
  * sDeltaY will be used in MainActivity.
  */
