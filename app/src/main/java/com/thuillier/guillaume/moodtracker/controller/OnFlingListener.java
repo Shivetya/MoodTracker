@@ -1,4 +1,4 @@
-package com.thuillier.guillaume.moodtracker.model;
+package com.thuillier.guillaume.moodtracker.controller;
 
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -8,9 +8,9 @@ import android.view.MotionEvent;
  * sDeltaY will be used in MainActivity.
  */
 
-public class MySimpleGestureListener extends GestureDetector.SimpleOnGestureListener {
+public class OnFlingListener extends GestureDetector.SimpleOnGestureListener {
 
-    public static float sDeltaY;
+    private float mDeltaY;
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
@@ -21,7 +21,7 @@ public class MySimpleGestureListener extends GestureDetector.SimpleOnGestureList
 
         if (e1 != null) {
 
-            sDeltaY = e1.getY() - e2.getY();
+            mDeltaY = e1.getY() - e2.getY();
             return true;
 
         } else {
@@ -30,4 +30,7 @@ public class MySimpleGestureListener extends GestureDetector.SimpleOnGestureList
         }
     }
 
+    float getDeltaY() {
+        return mDeltaY;
+    }
 }

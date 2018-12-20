@@ -11,5 +11,9 @@
     <string name="two_days_ago">Avant-hier</string>
     <string name="yesterday">Hier</string>
     <string name="share">Partager</string>
-    <string name="very_bad">Très mauvaise</string>
+    <string name="very_bad">très mauvaise</string>
+    <string name="bad">mauvaise</string>
+    <string name="normal">normal</string>
+    <string name="happy">heureuse</string>
+    <string name="very_happy">très heureuse</string>
 </resources>

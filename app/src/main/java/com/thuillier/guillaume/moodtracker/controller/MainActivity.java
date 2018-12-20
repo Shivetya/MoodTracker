@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton mHistoryButton;
     private RelativeLayout mMainBackground;
     private GestureDetector mGestureListener;
+    private OnFlingListener mOnFlingListener;
     private static final int MAX_MOOD = Mood.values().length;
     private int mLocationInt = (MAX_MOOD+1) /2;
     final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
@@ -44,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
         mMainBackground = findViewById(R.id.activity_main_background);
         TextView shareTv = findViewById(R.id.activity_main_share_textview);
 
-        mGestureListener = new GestureDetector(this, new MySimpleGestureListener());
+        mOnFlingListener = new OnFlingListener();
+        mGestureListener = new GestureDetector(this,mOnFlingListener);
         mHistory = getSharedPreferences("History.History",MODE_PRIVATE);
 
         if (mHistory.getInt("mood : " + getStringDate(), -1) != -1) {
@@ -83,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         float deltaY;
 
         if (consumedEvent){
-            deltaY = MySimpleGestureListener.sDeltaY;
+            deltaY = mOnFlingListener.getDeltaY();
 
             if(deltaY > 0) swipeUp();
             else swipeDown();

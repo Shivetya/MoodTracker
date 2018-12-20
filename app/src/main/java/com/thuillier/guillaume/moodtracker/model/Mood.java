@@ -13,10 +13,10 @@ import com.thuillier.guillaume.moodtracker.R;
 
 public enum Mood {
     VERY_SAD (R.color.faded_red, R.mipmap.smiley_sad, 0.2f, R.string.very_bad),
-    SAD (R.color.warm_grey, R.mipmap.smiley_disappointed, 0.4f, "mauvaise"),
-    NORMAL (R.color.cornflower_blue_65, R.mipmap.smiley_normal, 0.6f, "normale"),
-    HAPPY (R.color.light_sage, R.mipmap.smiley_happy,0.8f,"heureuse"),
-    VERY_HAPPY (R.color.banana_yellow, R.mipmap.smiley_super_happy,1f, "très heureuse");
+    SAD (R.color.warm_grey, R.mipmap.smiley_disappointed, 0.4f, R.string.bad),
+    NORMAL (R.color.cornflower_blue_65, R.mipmap.smiley_normal, 0.6f, R.string.normal),
+    HAPPY (R.color.light_sage, R.mipmap.smiley_happy,0.8f,R.string.happy),
+    VERY_HAPPY (R.color.banana_yellow, R.mipmap.smiley_super_happy,1f, R.string.very_happy);
 
         @ColorRes
         int mNumberColor;
