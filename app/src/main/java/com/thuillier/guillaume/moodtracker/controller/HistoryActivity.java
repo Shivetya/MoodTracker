@@ -1,6 +1,5 @@
 package com.thuillier.guillaume.moodtracker.controller;
 
-import android.content.SharedPreferences;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v4.content.ContextCompat;
@@ -11,27 +10,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.thuillier.guillaume.moodtracker.R;
 import com.thuillier.guillaume.moodtracker.model.Mood;
-import org.threeten.bp.LocalDate;
 
 public class HistoryActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView[] mTv = new TextView[7];
-    private SharedPreferences mHistory;
     private String[] mComments = new String[7];
+    private HistorySharedPreferences mHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-        mHistory = getSharedPreferences("History.History",MODE_PRIVATE);
+        mHistory = new HistorySharedPreferences(this);
 
-        mTv[6] = findViewById(R.id.history_activity_first_TV);
-        mTv[5] = findViewById(R.id.history_activity_second_TV);
-        mTv[4] = findViewById(R.id.history_activity_third_TV);
-        mTv[3] = findViewById(R.id.history_activity_fourth_TV);
-        mTv[2] = findViewById(R.id.history_activity_fifth_TV);
-        mTv[1] = findViewById(R.id.history_activity_sixth_TV);
-        mTv[0] = findViewById(R.id.history_activity_seventh_TV);
+        mTv[0] = findViewById(R.id.history_activity_yesterday_TV);
+        mTv[1] = findViewById(R.id.history_activity_two_days_ago_TV);
+        mTv[2] = findViewById(R.id.history_activity_three_days_ago_TV);
+        mTv[3] = findViewById(R.id.history_activity_four_days_ago_TV);
+        mTv[4] = findViewById(R.id.history_activity_five_days_ago_TV);
+        mTv[5] = findViewById(R.id.history_activity_six_days_ago_TV);
+        mTv[6] = findViewById(R.id.history_activity_week_ago_TV);
 
         setVisualAndComments();
     }
@@ -56,24 +54,23 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
 
     private void setVisualAndComments(){
 
-        LocalDate date = LocalDate.now();
-        ConstraintLayout constrainLayout = findViewById(R.id.history_activity_constraint_layout);
+        ConstraintLayout constraintLayout = findViewById(R.id.history_activity_constraint_layout);
         ConstraintSet set = new ConstraintSet();
-        set.clone(constrainLayout);
+        set.clone(constraintLayout);
         Mood mood;
 
         for (int i = 0; i < mTv.length; i++) {
 
-            mood = Mood.fromValues(mHistory.getInt("mood : " + date.minusDays(i + 1).format(MainActivity.formatter), 3));
+            mood = Mood.fromValues(mHistory.getMoodXDaysAgo(i + 1));
 
             set.constrainPercentWidth(mTv[i].getId(), mood.getPercent());
-            set.applyTo(constrainLayout);
+            set.applyTo(constraintLayout);
             mTv[i].setBackgroundColor(ContextCompat.getColor(this, mood.getNumberColor()));
 
-            if (mHistory.getString("comment : " + date.minusDays(i + 1).format(MainActivity.formatter), null ) != null) {
+            if (mHistory.getCommentXDaysAgo(i + 1) != null) {
                 mTv[i].setOnClickListener(this);
                 mTv[i].setCompoundDrawablesWithIntrinsicBounds(0,0,R.mipmap.ic_comment_black_48px,0);
-                mComments[i] = mHistory.getString("comment : " + date.minusDays(i + 1).format(MainActivity.formatter), null );
+                mComments[i] = mHistory.getCommentXDaysAgo(i + 1);
             }
         }
     }

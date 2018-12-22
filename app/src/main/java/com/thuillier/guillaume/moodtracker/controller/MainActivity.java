@@ -2,7 +2,6 @@ package com.thuillier.guillaume.moodtracker.controller;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,8 +14,6 @@ import android.widget.*;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.thuillier.guillaume.moodtracker.R;
 import com.thuillier.guillaume.moodtracker.model.*;
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.format.DateTimeFormatter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,8 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private OnFlingListener mOnFlingListener;
     private static final int MAX_MOOD = Mood.values().length;
     private int mLocationInt = (MAX_MOOD+1) /2;
-    final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
-    private SharedPreferences mHistory;
+    private HistorySharedPreferences mHistory;
     private String mCommentMood = null;
     private Mood mActualMood;
 
@@ -46,15 +42,12 @@ public class MainActivity extends AppCompatActivity {
         TextView shareTv = findViewById(R.id.activity_main_share_textview);
 
         mOnFlingListener = new OnFlingListener();
-        mGestureListener = new GestureDetector(this,mOnFlingListener);
-        mHistory = getSharedPreferences("History.History",MODE_PRIVATE);
+        mGestureListener = new GestureDetector(this, mOnFlingListener);
+        mHistory = new HistorySharedPreferences(this);
 
-        if (mHistory.getInt("mood : " + getStringDate(), -1) != -1) {
+        mLocationInt = mHistory.todayMood();
+        mCommentMood = mHistory.todayComment();
 
-            mLocationInt = mHistory.getInt("mood : " + getStringDate(), -1);
-            changeMoodVisual(mLocationInt);
-            mCommentMood = mHistory.getString("comment : " + getStringDate(), null);
-        }
 
         mNoteAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,17 +122,7 @@ public class MainActivity extends AppCompatActivity {
         mMainBackground.setBackgroundColor(ContextCompat.getColor(this, mActualMood.getNumberColor()));
         mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, mActualMood.getNumberColor()));
         mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, mActualMood.getNumberColor()));
-    }
-
-    /**
-     * This method ask the date to save the int of the mood and the comment in history.history thanks to SharedPreferences.
-     */
-
-    private void saveActualMood(){
-
-        String stringDate = getStringDate();
-        mHistory.edit().putInt("mood : " + stringDate, mLocationInt).apply();
-        mHistory.edit().putString("comment : " + stringDate, mCommentMood).apply();
+        saveActualMood();
     }
 
     /**
@@ -154,8 +137,8 @@ public class MainActivity extends AppCompatActivity {
         adBuilder.setView(input);
         adBuilder.setTitle("Commentaire");
 
-        if (mHistory.getString("comment : " + getStringDate(), null) != null){
-            input.setText(mHistory.getString("comment : " + getStringDate(), null));
+        if (mHistory.todayComment() != null){
+            input.setText(mHistory.todayComment());
         }
 
         adBuilder.setPositiveButton("VALIDER", new DialogInterface.OnClickListener() {
@@ -176,12 +159,6 @@ public class MainActivity extends AppCompatActivity {
         adBuilder.show();
     }
 
-    private String getStringDate(){
-
-        LocalDate date = LocalDate.now();
-        return date.format(formatter);
-    }
-
 
     /**
      * Method that allow to share the description of the mood with the comment (if it exists).
@@ -198,5 +175,9 @@ public class MainActivity extends AppCompatActivity {
         shareMood.setType("text/plain");
         shareMood.putExtra(Intent.EXTRA_TEXT, stringToShare);
         startActivity(shareMood);
+    }
+
+    private void saveActualMood(){
+        mHistory.saveActualMood(mLocationInt, mCommentMood);
     }
 }
