@@ -17,13 +17,12 @@ import com.thuillier.guillaume.moodtracker.model.*;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int MAX_MOOD = Mood.values().length;
+
     private ImageView mSmileyImage;
-    private ImageButton mNoteAddButton;
-    private ImageButton mHistoryButton;
     private RelativeLayout mMainBackground;
     private GestureDetector mGestureListener;
     private OnFlingListener mOnFlingListener;
-    private static final int MAX_MOOD = Mood.values().length;
     private int mLocationInt = (MAX_MOOD+1) /2;
     private HistorySharedPreferences mHistory;
     private String mCommentMood = null;
@@ -35,11 +34,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         AndroidThreeTen.init(this);
 
+        ImageButton noteAddButton = findViewById(R.id.activity_main_note_add_button);
+        ImageButton historyButton = findViewById(R.id.activity_main_history_button);
+        ImageButton shareTv = findViewById(R.id.activity_main_share_button);
+
         mSmileyImage = findViewById(R.id.activity_main_image_smiley);
-        mNoteAddButton = findViewById(R.id.activity_main_note_add_button);
-        mHistoryButton = findViewById(R.id.activity_main_history_button);
         mMainBackground = findViewById(R.id.activity_main_background);
-        TextView shareTv = findViewById(R.id.activity_main_share_textview);
 
         mOnFlingListener = new OnFlingListener();
         mGestureListener = new GestureDetector(this, mOnFlingListener);
@@ -47,16 +47,16 @@ public class MainActivity extends AppCompatActivity {
 
         mLocationInt = mHistory.todayMood();
         mCommentMood = mHistory.todayComment();
+        changeMoodVisual(mLocationInt);
 
-
-        mNoteAddButton.setOnClickListener(new View.OnClickListener() {
+        noteAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alertDialogComment();
             }
         });
 
-        mHistoryButton.setOnClickListener(new View.OnClickListener() {
+        historyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent historyActivityIntent = new Intent (MainActivity.this, HistoryActivity.class);
@@ -80,8 +80,15 @@ public class MainActivity extends AppCompatActivity {
         if (consumedEvent){
             deltaY = mOnFlingListener.getDeltaY();
 
-            if(deltaY > 0) swipeUp();
-            else swipeDown();
+            if(deltaY > 0){
+
+                swipeUp();
+            }
+
+            else{
+
+                swipeDown();
+            }
 
             return true;
         }
@@ -112,16 +119,14 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * This method change everything that depends on the active mood : smiley, background color, background color of buttons.
-     * @param location = mLocationInt, that allow program to know which mood to display.
+     * @param index = mLocationInt, that allow program to know which mood to display.
      */
-    private void changeMoodVisual(int location){
+    private void changeMoodVisual(int index){
 
-        mActualMood = Mood.fromValues(location);
+        mActualMood = Mood.values()[index];
 
         mSmileyImage.setImageResource(mActualMood.getSmileyImage());
         mMainBackground.setBackgroundColor(ContextCompat.getColor(this, mActualMood.getNumberColor()));
-        mNoteAddButton.setBackgroundColor(ContextCompat.getColor(this, mActualMood.getNumberColor()));
-        mHistoryButton.setBackgroundColor(ContextCompat.getColor(this, mActualMood.getNumberColor()));
         saveActualMood();
     }
 
@@ -132,16 +137,18 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog.Builder adBuilder = new AlertDialog.Builder(this);
 
+        String todayComment = mHistory.todayComment();
+
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
         adBuilder.setView(input);
-        adBuilder.setTitle("Commentaire");
+        adBuilder.setTitle(R.string.comment);
 
-        if (mHistory.todayComment() != null){
-            input.setText(mHistory.todayComment());
+        if (todayComment != null){
+            input.setText(todayComment);
         }
 
-        adBuilder.setPositiveButton("VALIDER", new DialogInterface.OnClickListener() {
+        adBuilder.setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mCommentMood = input.getText().toString();
@@ -149,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        adBuilder.setNegativeButton("ANNULER", new DialogInterface.OnClickListener() {
+        adBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -165,10 +172,11 @@ public class MainActivity extends AppCompatActivity {
      */
     private void shareMood(){
 
-        String stringToShare = "Hello ! Je suis aujourd'hui d'humeur " + getString(mActualMood.getDescription()) + " !";
+        String descriptionMood = getString(mActualMood.getDescription());
+        String stringToShare = R.string.share_hello_first_part + descriptionMood + R.string.share_hello_second_part;
 
         if (mCommentMood != null){
-            stringToShare += "\n Voilà pourquoi : " + mCommentMood;
+            stringToShare += R.string.here_is_why + mCommentMood;
         }
 
         Intent shareMood = new Intent(Intent.ACTION_SEND);

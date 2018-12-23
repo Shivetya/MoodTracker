@@ -16,4 +16,10 @@
     <string name="normal"> normal</string>
     <string name="happy"> heureuse</string>
     <string name="very_happy"> très heureuse</string>
+    <string name="comment">Commentaire</string>
+    <string name="OK">Valider</string>
+    <string name="cancel">Annuler</string>
+    <string name="here_is_why">\nVoilà pourquoi : </string>
+    <string name="share_hello_first_part">Hello : Je suis aujourd\'hui d\'humeur </string>
+    <string name="share_hello_second_part"> !</string>
 </resources>

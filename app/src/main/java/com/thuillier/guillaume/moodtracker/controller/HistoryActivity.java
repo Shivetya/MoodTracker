@@ -17,6 +17,10 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
     private String[] mComments = new String[7];
     private HistorySharedPreferences mHistory;
 
+    /**
+     * Here, mTv[0] is the lower textview in the screen, not the higher.
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,10 +62,12 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
         ConstraintSet set = new ConstraintSet();
         set.clone(constraintLayout);
         Mood mood;
+        int locationIntAgo;
 
         for (int i = 0; i < mTv.length; i++) {
 
-            mood = Mood.fromValues(mHistory.getMoodXDaysAgo(i + 1));
+            locationIntAgo = mHistory.getMoodXDaysAgo(i + 1);
+            mood = Mood.values()[locationIntAgo];
 
             set.constrainPercentWidth(mTv[i].getId(), mood.getPercent());
             set.applyTo(constraintLayout);
@@ -69,7 +75,7 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
 
             if (mHistory.getCommentXDaysAgo(i + 1) != null) {
                 mTv[i].setOnClickListener(this);
-                mTv[i].setCompoundDrawablesWithIntrinsicBounds(0,0,R.mipmap.ic_comment_black_48px,0);
+                mTv[i].setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_comment_black_48px,0);
                 mComments[i] = mHistory.getCommentXDaysAgo(i + 1);
             }
         }
