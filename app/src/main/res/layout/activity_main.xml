@@ -47,7 +47,7 @@
         android:layout_marginBottom="20dp"
         android:layout_centerHorizontal="true"
         android:contentDescription="@string/share"
-        android:background="null"
+        android:background="@null"
         android:src="@drawable/ic_share_black_24dp"/>
 
 </RelativeLayout>

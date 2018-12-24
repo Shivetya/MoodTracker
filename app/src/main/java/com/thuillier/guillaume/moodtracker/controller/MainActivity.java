@@ -18,6 +18,7 @@ import com.thuillier.guillaume.moodtracker.model.*;
 public class MainActivity extends AppCompatActivity {
 
     private static final int MAX_MOOD = Mood.values().length;
+    private static final String TYPE_INTENT_SHARE = "text/plain";
 
     private ImageView mSmileyImage;
     private RelativeLayout mMainBackground;
@@ -180,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Intent shareMood = new Intent(Intent.ACTION_SEND);
-        shareMood.setType("text/plain");
+        shareMood.setType(TYPE_INTENT_SHARE);
         shareMood.putExtra(Intent.EXTRA_TEXT, stringToShare);
         startActivity(shareMood);
     }
