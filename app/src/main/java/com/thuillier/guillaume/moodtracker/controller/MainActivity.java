@@ -174,10 +174,10 @@ public class MainActivity extends AppCompatActivity {
     private void shareMood(){
 
         String descriptionMood = getString(mActualMood.getDescription());
-        String stringToShare = R.string.share_hello_first_part + descriptionMood + R.string.share_hello_second_part;
+        String stringToShare = getText(R.string.share_hello_first_part) + descriptionMood + getText(R.string.share_hello_second_part);
 
         if (mCommentMood != null){
-            stringToShare += R.string.here_is_why + mCommentMood;
+            stringToShare += getText(R.string.here_is_why) + mCommentMood;
         }
 
         Intent shareMood = new Intent(Intent.ACTION_SEND);
